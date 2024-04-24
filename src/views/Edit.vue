@@ -48,7 +48,7 @@ onMounted(async () => {
     climbData.value.name = 'New Route';
     lock.value = false;
   } else {
-    const response = await axios.get(`${endpoint}/${climbID}`);
+    const response = await axios.get(`${endpoint}/climb/${climbID}`);
     if (response.data.valueOf() === 404) {
       await router.push('/');
     }
