@@ -69,10 +69,10 @@ onMounted(async () => {
   });
 
   const bounds = [[0, 0], [3072, 3464]];
-  L.imageOverlay('/public/spray.jpg', bounds).addTo(map);
+  L.imageOverlay('/spray.jpg', bounds).addTo(map);
   map.fitBounds(bounds);
 
-  await fetch('/public/polys.json')
+  await fetch('/polys.json')
       .then(function (response) {
         return response.json();
       })
