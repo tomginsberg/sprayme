@@ -51,7 +51,7 @@ function openClimb(index) {
           v-for="(item, index) in filteredClimbs"
           @click="openClimb(item.name)"
           :key="index"
-          class="bg-gray-800 flex transform cursor-pointer flex-col justify-between text-wrap break-words rounded-lg p-4 text-black transition duration-150 ease-in-out active:scale-95 dark:text-gray-100"
+          class="bg-gray-200 text-gray-900 dark:bg-gray-800 flex transform cursor-pointer flex-col justify-between text-wrap break-words rounded-lg p-4 text-black transition duration-150 ease-in-out active:scale-95 dark:text-gray-100"
       >
         <div class="flex-auto">
           <div class="flex flex-wrap justify-between">

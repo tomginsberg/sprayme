@@ -6,7 +6,6 @@ import Dialog from "primevue/dialog";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import Dropdown from "primevue/dropdown";
-import FloatLabel from "primevue/floatlabel";
 import InputGroup from "primevue/inputgroup";
 import {useRoute, useRouter} from "vue-router";
 import axios from "axios";
@@ -312,7 +311,7 @@ function toggleLock() {
   <div id="marketing-banner" tabindex="-1"
        class="fixed z-[1000] flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600">
     <div class="flex flex-row justify-between">
-      <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">{{
+      <span class="self-center text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-white">{{
           climbData.name.replaceAll('-', ' ')
         }}</span>
       <div class="flex flex-row space-x-4">
@@ -442,19 +441,38 @@ function toggleLock() {
     </button>
   </div>
 
-  <Dialog v-model:visible="visible" modal header="🧗 Save Route" :style="{ width: '25rem' }">
-    <InputGroup>
-      <InputText :placeholder="placeHolderName" id="Name" v-model="name"/>
-      <Dropdown id="Grade" panel-class="w-[10]" autocomplete="off" :options="grades"
-                v-model="grade"
-                placeholder="Grade"
-      />
-    </InputGroup>
+  <InputGroup>
+    <InputText :placeholder="placeHolderName" id="Name" v-model="name"/>
 
-    <div class="flex justify-content-end gap-2 mt-4">
-      <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
-      <Button type="button" label="Save" @click="saveRoute"></Button>
-    </div>
+  </InputGroup>
+
+  <Dialog
+      v-model:visible="visible"
+      modal
+      header="🧗 Save Route"
+      :style="{ width: '25rem' }"
+  >
+    <template #container="{ closeCallback }">
+      <div class="flex flex-col px-10 py-7 gap-5 bg-gray-200 dark:bg-gray-800 rounded-lg">
+        <h1 class="text-2xl font-semibold text-gray-900 dark:text-primary-50">🧗 Save Route</h1>
+        <div class="inline-flex flex-col gap-2">
+          <label for="Name" class="text-gray-900 dark:text-primary-50 font-semibold">Name</label>
+          <InputText :placeholder="placeHolderName" id="Name" v-model="name"
+          />
+        </div>
+        <div class="inline-flex flex-col gap-2">
+          <label for="Grade" class="text-gray-900 dark:text-primary-50 font-semibold">Grade</label>
+          <Dropdown id="Grade" autocomplete="off" :options="grades"
+                    v-model="grade"
+                    placeholder="Grade"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <Button icon="pi pi-save" label="Save" @click="saveRoute" text class="p-4 w-full text-white bg-green-600 hover:bg-white/10"></Button>
+          <Button icon="pi pi-times" label="Cancel" @click="closeCallback" text class="p-4 w-full text-white bg-red-600 hover:bg-white/10"></Button>
+        </div>
+      </div>
+    </template>
   </Dialog>
 
 

@@ -1,6 +1,7 @@
 <script setup>
 import {defineProps, defineEmits} from "vue";
 import {useRouter} from "vue-router";
+import DarkMode from "@/components/DarkMode.vue";
 
 const router = useRouter();
 
@@ -44,6 +45,7 @@ function updateInput(event) {
         <span class="px-1"/>
         {{ tabName }}
       </h1>
+      <DarkMode/>
 
     </div>
     <form class="max-w">
