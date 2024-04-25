@@ -302,6 +302,8 @@ function toggleLock() {
   lock.value = !lock.value;
 }
 
+const lightMode = (localStorage.getItem('color-theme') || 'light') === 'light';
+
 </script>
 
 
@@ -343,7 +345,7 @@ function toggleLock() {
   </div>
 
 
-  <div id="map" class="h-screen"></div>
+  <div id="map" class="h-screen" :style="{ backgroundColor: lightMode ? '#e2e8f0' : '#1e293b' }"></div>
 
   <div
       class="fixed bottom-0 left-0 z-[1000] w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
