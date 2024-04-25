@@ -8,6 +8,7 @@ import PrimeVue from 'primevue/config';
 import PrimeOne from 'primevue/themes/primeone';
 import Aura from 'primevue/themes/primeone/aura';
 import Lara from '/src/presets/lara';
+import './registerServiceWorker'
 
 const app = createApp(App);
 app.use(PrimeVue, {
