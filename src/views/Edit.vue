@@ -304,6 +304,24 @@ function toggleLock() {
 
 const lightMode = (localStorage.getItem('color-theme') || 'light') === 'light';
 
+import Toast from 'primevue/toast';
+import {useToast} from 'primevue/usetoast';
+
+const toast = useToast();
+
+function copyToClipboard() {
+  // copies https://sprayme.titanium.ddns.me/climb/:id to clipboard
+  const url = `https://sprayme.titanium.ddns.me/climb/${climbID}`;
+  navigator.clipboard.writeText(url);
+  toast.add({
+    severity: 'success',
+    summary: 'Copied to clipboard',
+    detail: `sprayme/${climbData.value.name}`,
+    life: 2000
+  });
+}
+
+
 </script>
 
 
@@ -313,9 +331,22 @@ const lightMode = (localStorage.getItem('color-theme') || 'light') === 'light';
   <div id="marketing-banner" tabindex="-1"
        class="fixed z-[1000] flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-4 -translate-x-1/2 bg-white border border-gray-100 rounded-lg shadow-sm lg:max-w-7xl left-1/2 top-6 dark:bg-gray-700 dark:border-gray-600">
     <div class="flex flex-row justify-between">
-      <span class="self-center text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-white">{{
-          climbData.name.replaceAll('-', ' ')
-        }}</span>
+      <div class="flex flex-row space-x-3">
+
+        <button class="p-2 mt-1 rounded-lg dark:bg-gray-500 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                @click="copyToClipboard">
+          <svg class="w-4 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+               width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>
+          </svg>
+        </button>
+        <span class="self-center text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-white">{{
+            climbData.name.replaceAll('-', ' ')
+          }}</span>
+      </div>
+
+
       <div class="flex flex-row space-x-4">
         <p v-if="climbData.grade" class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
           {{ climbData.grade }}
@@ -343,6 +374,7 @@ const lightMode = (localStorage.getItem('color-theme') || 'light') === 'light';
 
     </div>
   </div>
+  <Toast position="bottom-center"/>
 
 
   <div id="map" class="h-screen" :style="{ backgroundColor: lightMode ? '#e2e8f0' : '#1e293b' }"></div>
@@ -470,8 +502,10 @@ const lightMode = (localStorage.getItem('color-theme') || 'light') === 'light';
           />
         </div>
         <div class="flex items-center gap-2">
-          <Button icon="pi pi-save" label="Save" @click="saveRoute" text class="p-4 w-full text-white bg-green-600 hover:bg-white/10"></Button>
-          <Button icon="pi pi-times" label="Cancel" @click="closeCallback" text class="p-4 w-full text-white bg-red-600 hover:bg-white/10"></Button>
+          <Button icon="pi pi-save" label="Save" @click="saveRoute" text
+                  class="p-4 w-full text-white bg-green-600 hover:bg-white/10"></Button>
+          <Button icon="pi pi-times" label="Cancel" @click="closeCallback" text
+                  class="p-4 w-full text-white bg-red-600 hover:bg-white/10"></Button>
         </div>
       </div>
     </template>

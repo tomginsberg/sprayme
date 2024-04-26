@@ -5,8 +5,7 @@ import "primeicons/primeicons.css";
 import App from './App.vue'
 import { router } from "./router";
 import PrimeVue from 'primevue/config';
-import PrimeOne from 'primevue/themes/primeone';
-import Aura from 'primevue/themes/primeone/aura';
+import ToastService from 'primevue/toastservice';
 import Lara from '/src/presets/lara';
 
 const app = createApp(App);
@@ -15,6 +14,7 @@ app.use(PrimeVue, {
     pt: Lara
 });
 
+app.use(ToastService);
 app.use(router)
 
 app.mount('#app')
