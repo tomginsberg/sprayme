@@ -267,7 +267,7 @@ async function saveOrCheckRoute(name, idx, types) {
     alert(errMessage);
     return [400, errors];
   } else {
-    climbData.value.name = saveName;
+    climbData.value.name = saveName.replaceAll(' ', '-');
     climbData.value.grade = grade.value;
     lock.value = true;
     return [200, response.data.message]
@@ -333,7 +333,7 @@ function copyToClipboard() {
     <div class="flex flex-row justify-between">
       <div class="flex flex-row space-x-3">
 
-        <button class="p-2 mt-1 rounded-lg dark:bg-gray-500 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+        <button v-show="climbData.name !== 'New Route'" class="p-2 mt-1 rounded-lg dark:bg-gray-500 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
                 @click="copyToClipboard">
           <svg class="w-4 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
